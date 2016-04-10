@@ -130,7 +130,14 @@ namespace Project.Business
                 return response;
             }
 
+            var result = _personRepository.SelectPage(request.Skip, request.Take, request.Filter);
+            response.TotalCount = result.Count;
 
+            foreach (var item in result.Items)
+            {
+                var model = PersonMapper.MapModelFromEntity(item);
+                response.Items.Add(model);
+            }            
 
             return response;
         }

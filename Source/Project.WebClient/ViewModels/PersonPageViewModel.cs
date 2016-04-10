@@ -8,6 +8,7 @@ namespace Project.WebClient.ViewModels
     public class PersonPageViewModel
     {
         public List<PersonViewModel> Items { get; set; }
+        public long TotalCount { get; internal set; }
 
         public PersonPageViewModel()
         {

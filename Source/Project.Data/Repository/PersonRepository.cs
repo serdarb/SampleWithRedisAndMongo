@@ -54,6 +54,27 @@ namespace Project.Data.Repository
             return entity;
         }
 
+        public PersonPage SelectPage(int skip, int take, string filter = null)
+        {
+            var filterObject = Builders<Person>.Filter;
+            var query = filterObject.Where(x => x.Email != "");
 
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                query = filterObject.Where(x => x.FirstName.Contains(filter)
+                                                || x.LastName.Contains(filter)
+                                                || x.Email.Contains(filter)
+                                                || x.Phone.Contains(filter));                
+            }
+
+            var count = _collection.Count(query);
+            var items = _collection.Find(query).Skip(skip).Limit(take).ToList();
+
+            var result = new PersonPage();
+            result.Count = count;
+            result.Items = items;           
+
+            return result;
+        }
     }
 }

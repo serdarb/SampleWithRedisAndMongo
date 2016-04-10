@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Project.Common.Models.Response
 {
     public class PersonSelectPageResponse : BaseResponse
     {
+        public List<PersonModel> Items { get; set; }
+        public long TotalCount { get; set; }
+
+        public PersonSelectPageResponse()
+        {
+            Items = new List<PersonModel>();
+        }
     }
 }

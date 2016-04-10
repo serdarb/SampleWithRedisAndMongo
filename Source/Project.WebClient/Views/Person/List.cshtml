@@ -9,4 +9,82 @@
 <br />
 
 
-<table></table>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td></td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Phone</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.Items)
+        {
+            <tr>
+                <td>
+                    <a href="/Person/Detail?uid=@person.UId" class="btn btn-info btn-sm">Detail</a>
+                </td>
+                <td>@person.FirstName</td>
+                <td>@person.LastName</td>
+                <td>@person.Email</td>
+                <td>@person.Phone</td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#mdlDelete" data-uid="@person.UId">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<!-- Modal -->
+<div id="mdlDelete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+                <strong>You are about to delete this entity.</strong>
+                <div id="deleteInfo">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnDelete">Yes, Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section SCRIPT{
+    <script>
+        $('#mdlDelete').on('shown.bs.modal', function (e) {
+            var $invoker = $(e.relatedTarget);
+            var row = $invoker.parent().parent();
+
+            var uid = $invoker.data('uid');
+            var firstName = row.children().eq(1).text();
+            var lastName = row.children().eq(2).text();
+            var email = row.children().eq(3).text();
+            var phone = row.children().eq(4).text();
+
+            $('#deleteInfo').html(firstName + ' ' + lastName + '<br/>' +
+                                  email + '<br/>' +
+                                  phone);
+
+            $('#btnDelete').data('uid', uid);
+        });
+
+        $('#btnDelete').click(function () {
+            var uid = $(this).data('uid');
+
+            console.log(uid);
+        });
+    </script>
+}

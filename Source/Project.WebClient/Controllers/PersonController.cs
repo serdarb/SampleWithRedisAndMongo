@@ -44,11 +44,18 @@ namespace Project.WebClient.Controllers
             }
 
             var request = new PersonSelectPageRequest(skip, take, filter);
-            var model = _personService.SelectPage(request);
+            var response = _personService.SelectPage(request);
+                        
+            var model = new PersonPageViewModel();
+            model.TotalCount = response.TotalCount;
 
-            //todo: implement
+            foreach (var item in response.Items)
+            {
+                var mapped = PersonMapper.MapViewModelFromModel(item);
+                model.Items.Add(mapped);
+            }
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]
@@ -124,7 +131,7 @@ namespace Project.WebClient.Controllers
             return View();
         }
 
-        [HttpPost, 
+        [HttpPost,
          ValidateAntiForgeryToken,
          Journal(Message = "Person Inserted")]
         public ActionResult New(PersonViewModel model)
@@ -150,5 +157,7 @@ namespace Project.WebClient.Controllers
             model.Message = response.Message;
             return View(model);
         }
+
+
     }
 }

@@ -76,5 +76,13 @@ namespace Project.Business
             response.Message = "Person selected.";            
             return response;
         }
+
+        public PersonSelectPageResponse SelectPage(PersonSelectPageRequest request)
+        {
+            var response = new PersonSelectPageResponse();
+
+
+            return response;
+        }
     }
 }

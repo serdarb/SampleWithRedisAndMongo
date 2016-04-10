@@ -1,4 +1,5 @@
-﻿using Project.Common.Models.Request;
+﻿using System;
+using Project.Common.Models.Request;
 
 namespace Project.Business.Test.Helpers
 {
@@ -19,6 +20,6 @@ namespace Project.Business.Test.Helpers
             var request = new PersonSelectRequest();
             request.UId = uid;
             return request;
-        }
+        }        
     }
 }

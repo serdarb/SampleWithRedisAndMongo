@@ -19,5 +19,12 @@ namespace Project.Common.Contracts
         /// <param name="request"></param>
         /// <returns></returns>
         PersonSelectResponse Select(PersonSelectRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        PersonSelectPageResponse SelectPage(PersonSelectPageRequest request);
     }
 }

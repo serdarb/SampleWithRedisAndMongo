@@ -24,5 +24,21 @@ namespace Project.Business.Test
             //assert
             Assert.IsType<PersonInsertResponse>(response);
         }
+
+        [Fact]
+        public void PersonService_Select_ReturnsPersonSelectResponse()
+        {
+            //arrange
+            var request = TestHelper.GetPersonSelectRequest("test");
+
+            var repository = A.Fake<PersonRepository>();
+            var service = new PersonService(repository);
+
+            //act
+            var response = service.Select(request);
+
+            //assert
+            Assert.IsType<PersonSelectResponse>(response);
+        }
     }
 }

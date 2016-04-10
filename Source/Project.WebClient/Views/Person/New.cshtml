@@ -1,0 +1,35 @@
+﻿@model PersonViewModel
+@{
+    
+    ViewBag.PageTitle = "New Person Form";
+}
+
+<h2>@ViewBag.PageTitle</h2>
+<br />
+
+<form method="post">
+
+    @if (!string.IsNullOrWhiteSpace(Model?.Message))
+    {
+        <div class="alert alert-danger">
+            <strong>Error!</strong> @Model.Message
+        </div>
+    }
+
+    <label for="FirstName">First Name</label>
+    <input type="text" name="FirstName" id="FirstName" class="form-control" />
+
+    <label for="LastName">Last Name</label>
+    <input type="text" name="LastName" id="LastName" class="form-control" />
+
+    <label for="Email">Email</label>
+    <input type="email" name="Email" id="Email" class="form-control" />
+
+    <label for="Phone">Phone</label>
+    <input type="text" name="Phone" id="Phone" class="form-control" />
+
+    <br/>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

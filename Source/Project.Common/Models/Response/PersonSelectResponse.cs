@@ -1,6 +1,6 @@
 ﻿namespace Project.Common.Models.Response
 {
-    public class PersonInsertResponse : BaseResponse
+    public class PersonSelectResponse : BaseResponse
     {
         public PersonModel Model { get; set; }
     }

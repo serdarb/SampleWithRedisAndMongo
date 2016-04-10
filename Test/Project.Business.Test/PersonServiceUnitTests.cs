@@ -8,6 +8,9 @@ using Xunit;
 using Project.Common.Models.Request;
 using Project.Common.Models.Response;
 using Project.Business;
+using Project.Data.Repository;
+using FakeItEasy;
+using Project.Business.Test.Helpers;
 
 namespace Project.Business.Test
 {
@@ -17,8 +20,10 @@ namespace Project.Business.Test
         public void PersonService_Insert_ReturnsPersonInsertResponse()
         {
             //arrange
-            var request = new PersonInsertRequest();
-            var service = new PersonService();
+            var request = TestHelper.GetPersonInsertRequest();
+
+            var repository = A.Fake<PersonRepository>();
+            var service = new PersonService(repository);
 
             //act
             var response = service.Insert(request);

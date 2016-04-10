@@ -33,7 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FakeItEasy, Version=1.25.3.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\FakeItEasy.1.25.3\lib\net40\FakeItEasy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,10 +64,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\TestHelper.cs" />
+    <Compile Include="PersonServiceIntegrationTests.cs" />
     <Compile Include="PersonServiceUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +81,10 @@
     <ProjectReference Include="..\..\Source\Project.Common\Project.Common.csproj">
       <Project>{79b3b550-8c94-45ee-8ea3-173922cbbbc7}</Project>
       <Name>Project.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Source\Project.Data\Project.Data.csproj">
+      <Project>{97fa862a-ee9f-4028-a7ae-f363fb5cb1a5}</Project>
+      <Name>Project.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

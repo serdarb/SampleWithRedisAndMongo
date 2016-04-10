@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\PersonFactory.cs" />
+    <Compile Include="Mappers\PersonMapper.cs" />
     <Compile Include="PersonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -48,7 +51,12 @@
       <Project>{79b3b550-8c94-45ee-8ea3-173922cbbbc7}</Project>
       <Name>Project.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Project.Data\Project.Data.csproj">
+      <Project>{97fa862a-ee9f-4028-a7ae-f363fb5cb1a5}</Project>
+      <Name>Project.Data</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

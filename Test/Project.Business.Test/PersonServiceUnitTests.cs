@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Business.Test
 {
-    public class Class1
+    public class PersonServiceUnitTests
     {
     }
 }

@@ -59,5 +59,35 @@ namespace Project.Business.Test
             Assert.NotNull(response.Model);
             Assert.IsType<PersonModel>(response.Model);
         }
+
+        [Fact]
+        public void PersonService_Update()
+        {
+            //arrange
+            var service = GetPersonService();
+
+            var insertRequest = TestHelper.GetPersonInsertRequest();
+            var insertResponse = service.Insert(insertRequest);
+
+            var selectRequest = TestHelper.GetPersonSelectRequest(insertResponse.Model.UId);
+            var selectResponse = service.Select(selectRequest);
+
+            var request = TestHelper.GetPersonUpdateRequest(selectRequest, insertRequest);
+            request.FirstName = "test";
+
+            //act
+            var response = service.Update(request);
+
+            //assert
+            Assert.NotNull(response);
+            Assert.IsType<PersonUpdateResponse>(response);
+            Assert.NotNull(response.Model);
+            Assert.IsType<PersonModel>(response.Model);
+            Assert.Equal(response.Model.FirstName, request.FirstName);
+
+            selectRequest = TestHelper.GetPersonSelectRequest(insertResponse.Model.UId);
+            selectResponse = service.Select(selectRequest);
+            Assert.Equal(selectResponse.Model.FirstName, request.FirstName);
+        }
     }
 }

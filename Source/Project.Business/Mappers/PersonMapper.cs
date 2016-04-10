@@ -7,6 +7,15 @@ namespace Project.Business.Mappers
 {
     public static class PersonMapper
     {
+        public static Person MapEntityFromRequest(PersonUpdateRequest request, Person entity)
+        {
+            entity.FirstName = request.FirstName;
+            entity.LastName = request.LastName;            
+            entity.Phone = request.Phone;
+
+            return entity;
+        }
+
         public static Person MapEntityFromRequest(PersonInsertRequest request)
         {
             var person = PersonFactory.CreatePerson();
@@ -14,7 +23,7 @@ namespace Project.Business.Mappers
             person.FirstName = request.FirstName;
             person.LastName = request.LastName;
             person.Email = request.Email;
-            person.Phone = request.Phone;            
+            person.Phone = request.Phone;
 
             return person;
         }

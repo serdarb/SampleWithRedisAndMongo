@@ -9,6 +9,7 @@ using Project.Common.Models.Response;
 using Project.Data.Repository;
 using Project.Business.Mappers;
 using Project.Common.Contracts;
+using Project.Common.Helpers;
 
 namespace Project.Business
 {
@@ -27,7 +28,7 @@ namespace Project.Business
 
             if (request.IsNotValid())
             {
-                response.Message = "Request is not valid!";
+                response.Message = ConstHelper.REQUEST_NOT_VALID;
                 return response;
             }
 
@@ -49,6 +50,48 @@ namespace Project.Business
             response.Message = "Person inserted.";
             return response;
         }
+        
+        public PersonUpdateResponse Update(PersonUpdateRequest request)
+        {
+            var response = new PersonUpdateResponse();
+
+            if (request.IsNotValid())
+            {
+                response.Message = ConstHelper.REQUEST_NOT_VALID;
+                return response;
+            }
+
+            try
+            {
+                var entity = _personRepository.SelectOne(request.UId);
+                if (entity == null)
+                {
+                    response.Message = "There is no entity with this uid!";
+                    return response;
+                }
+
+                PersonMapper.MapEntityFromRequest(request, entity);
+                var result = _personRepository.Update(entity);
+
+                if (result.ModifiedCount != 1)
+                {
+                    response.Message = "Update could not be done!";
+                    return response;
+                }
+
+                var model = PersonMapper.MapModelFromEntity(entity);
+                response.Model = model;
+            }
+            catch (Exception)
+            {
+                response.Message = "Update entity failed on database process!";
+                return response;
+            }
+
+            response.Status = true;
+            response.Message = "Person updated.";
+            return response;
+        }
 
         public PersonSelectResponse Select(PersonSelectRequest request)
         {
@@ -56,7 +99,7 @@ namespace Project.Business
 
             if (request.IsNotValid())
             {
-                response.Message = "Request is not valid!";
+                response.Message = ConstHelper.REQUEST_NOT_VALID;
                 return response;
             }
 
@@ -81,15 +124,16 @@ namespace Project.Business
         {
             var response = new PersonSelectPageResponse();
 
+            if (request.IsNotValid())
+            {
+                response.Message = ConstHelper.REQUEST_NOT_VALID;
+                return response;
+            }
+
+
 
             return response;
         }
 
-        public PersonUpdateResponse Update(PersonUpdateRequest request)
-        {
-            var response = new PersonUpdateResponse();
-
-            return response;
-        }
     }
 }

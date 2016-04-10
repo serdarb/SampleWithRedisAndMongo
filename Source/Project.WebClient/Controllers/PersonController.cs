@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project.Common.Models.Request;
 using Project.Common.Helpers;
+using Project.WebClient.Filters;
 
 namespace Project.WebClient.Controllers
 {
@@ -46,7 +47,7 @@ namespace Project.WebClient.Controllers
             var model = _personService.SelectPage(request);
 
             //todo: implement
-            
+
             return View();
         }
 
@@ -54,15 +55,15 @@ namespace Project.WebClient.Controllers
         public ActionResult Detail(string uid)
         {
             var request = new PersonSelectRequest(uid);
-            
+
             if (request.IsNotValid())
             {
                 return RedirectToNotFound();
             }
-                        
+
             var response = _personService.Select(request);
             if (response.Status)
-            {                
+            {
                 var model = PersonMapper.MapViewModelFromModel(response.Model);
                 return View(model);
             }
@@ -90,18 +91,20 @@ namespace Project.WebClient.Controllers
             return View(model);
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost,
+         ValidateAntiForgeryToken,
+         Journal(Message = "Person Editted")]
         public ActionResult Edit(PersonViewModel model)
         {
             if (model == null)
             {
                 return View();
             }
-            
+
             var request = PersonMapper.MapUpdateRequestFromViewModel(model);
             if (request.IsNotValid())
             {
-                model.Message = "Request is not valid!";
+                model.Message = ConstHelper.REQUEST_NOT_VALID;
                 return View(model);
             }
 
@@ -112,7 +115,7 @@ namespace Project.WebClient.Controllers
             }
 
             model.Message = response.Message;
-            return View(model);            
+            return View(model);
         }
 
         [HttpGet]
@@ -121,7 +124,9 @@ namespace Project.WebClient.Controllers
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, 
+         ValidateAntiForgeryToken,
+         Journal(Message = "Person Inserted")]
         public ActionResult New(PersonViewModel model)
         {
             if (model == null)
@@ -132,7 +137,7 @@ namespace Project.WebClient.Controllers
             var request = PersonMapper.MapRequestFromViewModel(model);
             if (request.IsNotValid())
             {
-                model.Message = "Request is not valid!";
+                model.Message = ConstHelper.REQUEST_NOT_VALID;
                 return View(model);
             }
 

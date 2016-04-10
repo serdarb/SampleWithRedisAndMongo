@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IPersonService.cs" />
+    <Compile Include="Helpers\ConstHelper.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\CurrentUserModel.cs" />

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Project.Common.Models.Request
+﻿namespace Project.Common.Models.Request
 {
     public class PersonSelectPageRequest : BaseRequest
     {
@@ -19,7 +13,7 @@ namespace Project.Common.Models.Request
             Filter = filter;
         }
 
-        public override bool IsNotValid()
+        public void MakeValid()
         {
             if (Skip < 0)
             {
@@ -30,7 +24,11 @@ namespace Project.Common.Models.Request
             {
                 Take = 100;
             }
+        }
 
+        public override bool IsNotValid()
+        {
+            MakeValid();
             return false;
         }
     }

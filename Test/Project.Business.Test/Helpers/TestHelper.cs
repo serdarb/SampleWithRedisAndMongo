@@ -11,7 +11,7 @@ namespace Project.Business.Test.Helpers
             request.FirstName = "John";
             request.LastName = "Doe";
             request.Email = "john@doe.com";
-            request.Phone = "0090 555 669 99 88";            
+            request.Phone = "0090 555 669 99 88";
             return request;
         }
 
@@ -20,6 +20,17 @@ namespace Project.Business.Test.Helpers
             var request = new PersonSelectRequest();
             request.UId = uid;
             return request;
-        }        
+        }
+
+        internal static PersonUpdateRequest GetPersonUpdateRequest(PersonSelectRequest selectRequest, PersonInsertRequest insertRequest)
+        {
+            var request = new PersonUpdateRequest();
+            request.UId = selectRequest.UId;
+            request.FirstName = insertRequest.FirstName;
+            request.LastName = insertRequest.LastName;
+            request.Phone = insertRequest.Phone;
+
+            return request;
+        }
     }
 }

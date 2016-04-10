@@ -16,7 +16,7 @@ namespace Project.Data.Repository
         {
             var cnnStr = ConfigurationManager.AppSettings["CNN_STR"] ?? "mongodb://localhost";
             var dbName = ConfigurationManager.AppSettings["DB_NAME"] ?? "PeopleDB";
-            
+
             var settings = new MongoDatabaseSettings();
             settings.ReadConcern = new ReadConcern(ReadConcernLevel.Local);
             settings.WriteConcern = new WriteConcern(1, TimeSpan.FromSeconds(30), false, true);
@@ -29,7 +29,18 @@ namespace Project.Data.Repository
 
         public void Insert(Person entity)
         {
-            _collection.InsertOne(entity);            
+            _collection.InsertOne(entity);
+        }
+
+        public UpdateResult Update(Person entity)
+        {
+            var update = Builders<Person>.Update;
+            var definition = update.Set("FirstName", entity.FirstName)
+                                   .Set("LastName", entity.LastName)
+                                   .Set("Phone", entity.Phone);
+
+            var result = _collection.UpdateOne(x => x.Id == entity.Id, definition);
+            return result;
         }
 
         public Person SelectOne(string uid)
@@ -42,5 +53,7 @@ namespace Project.Data.Repository
             var entity = _collection.Find(query).FirstOrDefault();
             return entity;
         }
+
+
     }
 }

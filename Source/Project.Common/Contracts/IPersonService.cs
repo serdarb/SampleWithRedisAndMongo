@@ -6,7 +6,7 @@ namespace Project.Common.Contracts
     public interface IPersonService
     {
         /// <summary>
-        /// Inserts person entity to database. 
+        /// Inserts person entity. 
         /// Email is a required field for person.
         /// </summary>
         /// <param name="request"></param>
@@ -14,24 +14,27 @@ namespace Project.Common.Contracts
         PersonInsertResponse Insert(PersonInsertRequest request);
 
         /// <summary>
-        /// Selects person entity via the Uid.
+        /// Updates person entity.
+        /// Email can not be updated.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        PersonUpdateResponse Update(PersonUpdateRequest request);
+
+        /// <summary>
+        /// Selects person entity via Uid.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         PersonSelectResponse Select(PersonSelectRequest request);
 
         /// <summary>
-        /// 
+        /// Selects list of person entities with page limit.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
         PersonSelectPageResponse SelectPage(PersonSelectPageRequest request);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        PersonUpdateResponse Update(PersonUpdateRequest request);
+       
     }
 }

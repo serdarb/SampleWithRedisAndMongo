@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 
+using Newtonsoft.Json;
+
 namespace Project.WebClient.Filters
 {
     public class JournalAttribute : ActionFilterAttribute
@@ -18,6 +20,8 @@ namespace Project.WebClient.Filters
             var currentAction = rd.GetRequiredString("action");
             var currentController = rd.GetRequiredString("controller");
             var currentModel = filterContext.Controller.ViewData.Model;
+
+            var modelString = JsonConvert.SerializeObject(currentModel);
 
             //todo:save to journal db.
 

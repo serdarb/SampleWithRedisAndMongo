@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 
 using NLog;
+using Newtonsoft.Json;
 
 namespace Project.WebClient.Filters
 {
@@ -16,7 +17,14 @@ namespace Project.WebClient.Filters
             var url = request.RawUrl;
             var ip = request.UserHostAddress;
 
-            _logger.Info(" HttpMethod> " + method + ", Url> " + url + ", VisitorIp> " + ip);
+            var rd = request.RequestContext.RouteData;
+            var currentAction = rd.GetRequiredString("action");
+            var currentController = rd.GetRequiredString("controller");
+            var currentModel = filterContext.Controller.ViewData.Model;
+
+            var modelString = JsonConvert.SerializeObject(currentModel);
+
+            _logger.Info(" HttpMethod> " + method + ", Url> " + url + ", VisitorIp> " + ip + ", Model> " + modelString);
 
             base.OnResultExecuting(filterContext);
         }

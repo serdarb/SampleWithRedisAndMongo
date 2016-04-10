@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>@ViewBag.PageTitle</title>
+    <link rel="shortcut icon" href="/Statics/img/favicon.ico" />
+
+    <link href="/Statics/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Statics/css/app.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center sitename">
+                <h1>
+                    <a href="/">Sample Project</a>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="/Statics/js/jquery-2.2.2.min.js"></script>
+    <script src="/Statics/js/bootstrap.min.js"></script>
+    <script src="/Statics/js/app.js?v=@Guid.NewGuid()"></script>
+
+    @RenderSection("SCRIPT", false)
+</body>
+</html>

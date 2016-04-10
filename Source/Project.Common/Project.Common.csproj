@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IPersonService.cs" />
     <Compile Include="Helpers\EmailHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Models\CurrentUserModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\Request\BaseRequest.cs" />
     <Compile Include="Models\Request\PersonInsertRequest.cs" />

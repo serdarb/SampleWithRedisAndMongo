@@ -8,10 +8,11 @@ using Project.Common.Models.Request;
 using Project.Common.Models.Response;
 using Project.Data.Repository;
 using Project.Business.Mappers;
+using Project.Common.Contracts;
 
 namespace Project.Business
 {
-    public class PersonService
+    public class PersonService : IPersonService
     {
         PersonRepository _personRepository;
 

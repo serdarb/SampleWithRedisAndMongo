@@ -1,2 +1,33 @@
-﻿<a href="/Person/New" class="btn btn-primary pull-right">Add New Person</a>
+﻿@model PersonViewModel
+@{
 
+    ViewBag.PageTitle = "Person Detail View";
+}
+
+<a href="/Person/Edit?uid=@Model.UId" class="btn btn-info pull-right">Edit Person</a>
+
+<h3>@ViewBag.PageTitle</h3>
+<br />
+
+<strong>First Name</strong>
+<div>
+    @Model.FirstName
+</div>
+<br/>
+
+<strong>Last Name</strong>
+<div>
+    @Model.LastName
+</div>
+<br />
+
+<strong>Email</strong>
+<div>
+    @Model.Email
+</div>
+<br />
+
+<strong>Phone</strong>
+<div>
+    @Model.Phone
+</div>   

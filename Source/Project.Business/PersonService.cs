@@ -84,5 +84,12 @@ namespace Project.Business
 
             return response;
         }
+
+        public PersonUpdateResponse Update(PersonUpdateRequest request)
+        {
+            var response = new PersonUpdateResponse();
+
+            return response;
+        }
     }
 }

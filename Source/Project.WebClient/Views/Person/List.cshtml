@@ -1,2 +1,12 @@
-﻿<a href="/Person/New" class="btn btn-primary pull-right">Add New Person</a>
+﻿@model PersonPageViewModel
+@{
+    ViewBag.PageTitle = "People List";
+}
 
+<a href="/Person/New" class="btn btn-warning pull-right">Add New Person</a>
+
+<h3>@ViewBag.PageTitle</h3>
+<br />
+
+
+<table></table>

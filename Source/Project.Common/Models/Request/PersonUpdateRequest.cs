@@ -2,19 +2,12 @@
 
 namespace Project.Common.Models.Request
 {
-    public class PersonSelectRequest : BaseRequest
+    public class PersonUpdateRequest : BaseRequest
     {
         public string UId { get; set; }
-
-        public PersonSelectRequest()
-        {
-
-        }
-
-        public PersonSelectRequest(string uid)
-        {
-            UId = uid;
-        }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
 
         public override bool IsNotValid()
         {

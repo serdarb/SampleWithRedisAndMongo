@@ -1,2 +1,36 @@
-﻿<a href="/Person/New" class="btn btn-primary pull-right">Add New Person</a>
+﻿@model PersonViewModel
+@{
+    ViewBag.PageTitle = "Edit Person Form";
+}
+
+<a href="/Person/Detail?uid=@Model.UId" class="btn btn-info pull-right">Go To Person Detail</a>
+
+<h3>@ViewBag.PageTitle</h3>
+<br />
+
+<form method="post">
+
+    @if (!string.IsNullOrWhiteSpace(Model?.Message))
+    {
+        <div class="alert alert-danger">
+            <strong>Error!</strong> @Model.Message
+        </div>
+    }
+
+    <label for="FirstName">First Name</label>
+    <input type="text" name="FirstName" id="FirstName" class="form-control" value="@Model.FirstName" />
+
+    <label for="LastName">Last Name</label>
+    <input type="text" name="LastName" id="LastName" class="form-control" value="@Model.LastName" />
+
+    <label for="Email">Email</label>
+    <input type="email" name="Email" id="Email" class="form-control" value="@Model.Email"  disabled />
+
+    <label for="Phone">Phone</label>
+    <input type="text" name="Phone" id="Phone" class="form-control" value="@Model.Phone" />
+
+    <br />
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
 

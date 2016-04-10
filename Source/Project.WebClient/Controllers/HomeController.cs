@@ -9,5 +9,11 @@ namespace Project.WebClient.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ViewResult NotFound()
+        {
+            return View();
+        }
     }
 }

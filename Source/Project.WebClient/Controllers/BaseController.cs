@@ -14,6 +14,11 @@ namespace Project.WebClient.Controllers
             return Redirect("/");
         }
 
+        public RedirectResult RedirectToNotFound()
+        {
+            return Redirect("/Home/NotFound");
+        }
+
         public string GetRefererUrl()
         {
             return Request.UrlReferrer?.AbsoluteUri ?? "/";

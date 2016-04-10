@@ -26,5 +26,12 @@ namespace Project.Common.Contracts
         /// <param name="request"></param>
         /// <returns></returns>
         PersonSelectPageResponse SelectPage(PersonSelectPageRequest request);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        PersonUpdateResponse Update(PersonUpdateRequest request);
     }
 }

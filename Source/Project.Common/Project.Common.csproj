@@ -49,10 +49,12 @@
     <Compile Include="Models\Request\PersonInsertRequest.cs" />
     <Compile Include="Models\Request\PersonSelectPageRequest.cs" />
     <Compile Include="Models\Request\PersonSelectRequest.cs" />
+    <Compile Include="Models\Request\PersonUpdateRequest.cs" />
     <Compile Include="Models\Response\BaseResponse.cs" />
     <Compile Include="Models\Response\PersonInsertResponse.cs" />
     <Compile Include="Models\Response\PersonSelectPageResponse.cs" />
     <Compile Include="Models\Response\PersonSelectResponse.cs" />
+    <Compile Include="Models\Response\PersonUpdateResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

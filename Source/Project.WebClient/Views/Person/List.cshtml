@@ -49,7 +49,7 @@
                 <h4 class="modal-title">Are you sure?</h4>
             </div>
             <div class="modal-body">
-                <strong>You are about to delete this entity.</strong>
+                <strong>You are about to delete this record.</strong>
                 <div id="deleteInfo">
                 </div>
             </div>
@@ -58,7 +58,6 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -85,6 +84,11 @@
             var uid = $(this).data('uid');
 
             console.log(uid);
+
+            //todo: implement delete action method
+
+            $('button[data-uid="' + uid + '"]').parent().parent().remove();
+            $('#mdlDelete').modal('toggle');
         });
     </script>
 }

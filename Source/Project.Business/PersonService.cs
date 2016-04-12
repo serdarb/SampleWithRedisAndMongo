@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
+using Project.Business.Managers;
 using Project.Common.Models.Request;
 using Project.Common.Models.Response;
 using Project.Data.Repository;
 using Project.Business.Mappers;
 using Project.Common.Contracts;
 using Project.Common.Helpers;
+using Project.Common.Models;
+using Project.Data.Entity;
 
 namespace Project.Business
 {
     public class PersonService : IPersonService
     {
-        PersonRepository _personRepository;
+        readonly PersonRepository _personRepository;
 
         public PersonService(PersonRepository personRepository)
         {
@@ -40,17 +39,17 @@ namespace Project.Business
                 var model = PersonMapper.MapModelFromEntity(entity);
                 response.Model = model;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                response.Message = "Insert to database failed!";
+                response.Message = string.Format("Insert to database failed!{0}{1}", Environment.NewLine, ex.Message);
                 return response;
-            }            
+            }
 
             response.Status = true;
             response.Message = "Person inserted.";
             return response;
         }
-        
+
         public PersonUpdateResponse Update(PersonUpdateRequest request)
         {
             var response = new PersonUpdateResponse();
@@ -81,10 +80,13 @@ namespace Project.Business
 
                 var model = PersonMapper.MapModelFromEntity(entity);
                 response.Model = model;
+
+                var cacheKey = "Person-" + request.UId;
+                CacheManager.AddOrUpdateItem(cacheKey, model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                response.Message = "Update entity failed on database process!";
+                response.Message = string.Format("Update entity failed on database process!{0}{1}", Environment.NewLine, ex.Message);
                 return response;
             }
 
@@ -104,19 +106,29 @@ namespace Project.Business
             }
 
             try
-            {                
-                var entity = _personRepository.SelectOne(request.UId);
-                var model = PersonMapper.MapModelFromEntity(entity);
-                response.Model = model;
-            }
-            catch (Exception)
             {
-                response.Message = "Selecting failed while getting from database!";
+                var cacheKey = "Person-" + request.UId;
+                var cachedItem = CacheManager.GetItem(cacheKey);
+                if (cachedItem == null)
+                {
+                    var entity = _personRepository.SelectOne(request.UId);
+                    var model = PersonMapper.MapModelFromEntity(entity);
+                    response.Model = model;
+                    CacheManager.AddOrUpdateItem(cacheKey, model);
+                }
+                else
+                {
+                    response.Model = (PersonModel) cachedItem;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Message = string.Format("Selecting failed while getting from database!{0}{1}", Environment.NewLine, ex.Message);
                 return response;
             }
 
             response.Status = true;
-            response.Message = "Person selected.";            
+            response.Message = "Person selected.";
             return response;
         }
 
@@ -137,7 +149,7 @@ namespace Project.Business
             {
                 var model = PersonMapper.MapModelFromEntity(item);
                 response.Items.Add(model);
-            }            
+            }
 
             return response;
         }

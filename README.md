@@ -20,6 +20,8 @@ you can get help from [this script](https://gist.github.com/serdarb/5102848)
 
 * Install **Redis**
 
+you can use installer from [this repo] (https://github.com/rgl/redis/downloads)
+
 
 ### Running Application
 

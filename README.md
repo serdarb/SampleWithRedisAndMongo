@@ -25,9 +25,15 @@ you can use installer from [this repo] (https://github.com/rgl/redis/downloads)
 
 ### Running Application
 
+Just press F5 in visual to debud the application.
+The UI is an MVC client, so check if it is the start up project.
 
 ### Running Tests
 
+Run the test via test explorer in visual studio.
+If you want to use other options to run Test projects, they are in **Test** folder.
+
+To download selenium chromedriver go to [this link] (https://chromedriver.storage.googleapis.com/index.html?path=2.9/)
 
 
 
